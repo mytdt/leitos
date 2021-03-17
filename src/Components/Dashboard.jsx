@@ -37,13 +37,13 @@ export default class Teste extends Component {
       <div>
         <h1>
           <b>
-            Número de leitos disponíveis por Região:
+            Número de leitos disponíveis por Região
           </b>
         </h1>
         <section>
           {
             regions.map((region) => {
-              return <RegionCard key={region.nome} regions={region}/>;
+              return <RegionCard key={region.nome} region={region}/>;
             })
           }
         </section>

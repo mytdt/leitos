@@ -19,6 +19,7 @@ async function doFetch(query) {
 }
 
 export async function doFetchAll() {
+  console.log(doFetch({match_all: {}}));
   return doFetch({match_all: {}});
 }
 
