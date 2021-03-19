@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import RegionCard from './RegionCard';
+import Region from './Region';
 import * as Api from '../Services/Api';
 
 export default class Teste extends Component {
@@ -37,13 +37,13 @@ export default class Teste extends Component {
       <div>
         <h1>
           <b>
-            Número de leitos disponíveis por Região
+            Número de leitos disponíveis por Região:
           </b>
         </h1>
         <section>
           {
             regions.map((region) => {
-              return <RegionCard key={region.nome} region={region}/>;
+              return <Region key={region.nome} region={region}/>;
             })
           }
         </section>

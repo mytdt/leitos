@@ -19,39 +19,29 @@ async function doFetch(query) {
 }
 
 export async function doFetchAll() {
-  console.log(doFetch({match_all: {}}));
   return doFetch({match_all: {}});
 }
 
-export async function doFetchByState(stateSlg) {
+export async function doFetchBySingleState(stateSlg) {
   return doFetch({match:{estadoSigla: stateSlg}});
 }
 
-// async function getIdByRegion(state) {
-//   const endPoint = `https://servicodados.ibge.gov.br/api/v1/localidades/estados${state}`
-//   const result = await fetch(endPoint)
-//     .then((res)=>res);
+export async function doFetchByStates(acronymState) {
+  const query = {"match": {"estadoSigla": {"query": acronymState}}};
 
-//   return result;
-// }
+  return doFetch(query);
+}
 
+// -------------IBGE FETCH API------------------------------
 export async function getRegions() {
   return fetch('https://servicodados.ibge.gov.br/api/v1/localidades/regioes/')
   .then((res)=>res.json());
 }
 
 export async function getStatesByRegion(region) {
-  const regions = {
-    Norte: "1",
-    Nordeste: "2",
-    Sudeste: "3",
-    Sul: "4",
-    CentroOeste: "5",
-  }
-
-  const stateNumber = regions[region];
-  const endPoint = `https://servicodados.ibge.gov.br/api/v1/localidades/regioes/${stateNumber}/estados`
-
-  const result = await fetch(endPoint);
+  const endPoint = `https://servicodados.ibge.gov.br/api/v1/localidades/regioes/${region}/estados`;
+  const result = await fetch(endPoint)
+    .then((response) => response.json())
+    .then((json) => json);
   return result;
 }
