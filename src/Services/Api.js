@@ -34,8 +34,12 @@ export async function doFetchByStates(acronymState) {
 
 // -------------IBGE FETCH API------------------------------
 export async function getRegions() {
-  return fetch('https://servicodados.ibge.gov.br/api/v1/localidades/regioes/')
-  .then((res)=>res.json());
+  const endPoint = 'https://servicodados.ibge.gov.br/api/v1/localidades/regioes/';
+  const result = await fetch(endPoint)
+    .then((response) => response.json())
+    .then((json) => json);
+
+  return result;
 }
 
 export async function getStatesByRegion(region) {
@@ -43,5 +47,6 @@ export async function getStatesByRegion(region) {
   const result = await fetch(endPoint)
     .then((response) => response.json())
     .then((json) => json);
+
   return result;
 }

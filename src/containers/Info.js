@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Api from '../Services/Api';
 
 export default class Info extends React.Component {
   constructor(props) {
@@ -6,18 +7,19 @@ export default class Info extends React.Component {
 
     this.state = {
       loading: false,
+      regions: [],
       states: [],
+      info: {
+        ofertaHospCli: 0,
+        ofertaHospUti: 0,
+        ocupHospCli: 0,
+        ocupHospUti: 0,
+        altas: 0,
+        obitos: 0,
+      },
     }
   }
 
-  info = {
-    ofertaHospCli: 0,
-    ofertaHospUti: 0,
-    ocupHospCli: 0,
-    ocupHospUti: 0,
-    altas: 0,
-    obitos: 0,
-  };
 
   arrayToQuery(array) {
     return array.join(' AND ');
@@ -38,13 +40,13 @@ export default class Info extends React.Component {
       return Math.ceil(value);
     }
 
-    const keysTofloor = [
+    const keysToFloor = [
       'ofertaHospCli',
       'ofertaHospUti',
       'altas',
     ]
 
-    if (keysTofloor.indexOf(key) === -1) {
+    if (keysToFloor.indexOf(key) === -1) {
       return Math.floor(value);
     }
 
@@ -61,7 +63,9 @@ export default class Info extends React.Component {
   }
 
   consolidateInf(hospitais) {
-    this.info = hospitais.reduce((total, atual)=>{
+    const { info: initialInfo } = this.state;
+
+    const info = hospitais.reduce((total, atual)=>{
       const {
         ofertaHospCli = 0,
         ofertaHospUti = 0,
@@ -80,7 +84,11 @@ export default class Info extends React.Component {
 
       return total;
 
-    }, this.info);
+    }, initialInfo);
+
+    this.setState({
+      info,
+    });
   }
 
   componentDidMount() {

@@ -1,9 +1,9 @@
-import React from 'react';
 import Info from './Info';
 import * as Api from '../Services/Api';
 import Card from '../components/Card';
+import Loading from '../components/Loading';
 
-export default class Region extends Info {
+export default class RegionInfo extends Info {
   async getStates() {
     const { region } = this.props;
     const states = await Api.getStatesByRegion(region.id);
@@ -29,14 +29,14 @@ export default class Region extends Info {
 
 
   render() {
-    const { region } = this.props;
-    const { loading } = this.state;
-    const props = {
-      info: this.info,
-      loading,
-      name: region.nome,
-    };
+    const { loading, info } = this.state;
 
-    return <Card {...props} />;
+    if (loading) {
+      return <Loading />;
+    }
+
+    const { region } = this.props;
+
+    return <Card key={region.id} info={info} name={region.nome} />;
   }
 }
