@@ -67,22 +67,15 @@ export default class RegionInfo extends React.Component {
   render() {
     const { loading, numberOfStates, info } = this.state;
 
-    const numberOfRegions = 5;
-
     if (loading) {
-      const jsxLoading = [];
-      for (let i = 0; i < numberOfRegions; i += 1) {
-        jsxLoading.push(<Loading />);
-      }
-
-      return jsxLoading;
+      return <Loading />;
     }
 
     const { region } = this.props;
-    const link = `/${region.nome}`;
+    const link = `/${region.nome.toLowerCase()}`;
 
     const props = {
-      name: region.nome,
+      region,
       info,
       link,
       qtyLoadingForNextLink: numberOfStates,
