@@ -13,17 +13,23 @@ function App() {
     <Router>
       <Switch>
         <Route
+          exact
           path="/"
           render={ (props) => <Regions { ...props } /> }
         />
         <Route
+          exact
           path="/:region"
           render={ (props) => <States { ...props } /> }
         />
-        {/* <Route path='/:region/:state'
+        {/* <Route
+          exact
+          path='/:region/:state'
           render={ (props) => <Cities { ...props } />}
         />
-        <Route path='/:region/:state/:city'
+        <Route
+          exact
+          path='/:region/:state/:city'
           render={ (props) => <Hospitals { ...props } />}
         /> */}
       </Switch>

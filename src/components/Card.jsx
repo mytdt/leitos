@@ -6,12 +6,14 @@ import './Card.css';
 
 /**
  * Card component that renders a single card.
- * @param  {String}       props.name Card name
- * @param  {Object}       props.info Card info to display
- * @param  {String}       props.info Card link to more details
- * @return {ReactElement}            The markup to render
+ *
+ * @param  {String}       props.region                Region data
+ * @param  {Object}       props.info                  Card info to display
+ * @param  {String}       props.link                  Card link to more details
+ * @param  {String}       props.qtyLoadingForNextLink Card link to more details
+ * @return {ReactElement}                             The markup to render
  */
-const Card = ({ name, info, link }) => {
+const Card = ({ region, info, link, qtyLoadingForNextLink }) => {
   const {
     ofertaHospCli,
     ofertaHospUti,
@@ -21,11 +23,19 @@ const Card = ({ name, info, link }) => {
     obitos,
   } = info;
 
+  const linkParams = {
+    pathname: link,
+    props: {
+      qtyLoadingForNextLink,
+      region,
+    },
+  };
+
   return (
     <section className="container-card">
       <div className="header-card">
         <h3>
-          {name}
+          {region.nome}
         </h3>
       </div>
       <div>
@@ -74,13 +84,17 @@ const Card = ({ name, info, link }) => {
           </p>
         </section>
       </div>
-      <Link to={ `/${link}` }>+ DETALHES</Link>
+      <Link to={ linkParams }>+ DETALHES</Link>
     </section>
   );
 };
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
+  region: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    sigla: PropTypes.string.isRequired,
+    nome: PropTypes.string.isRequired,
+  }).isRequired,
   info: PropTypes.shape({
     ofertaHospCli: PropTypes.number.isRequired,
     ofertaHospUti: PropTypes.number.isRequired,
@@ -90,6 +104,7 @@ Card.propTypes = {
     obitos: PropTypes.number.isRequired,
   }).isRequired,
   link: PropTypes.string.isRequired,
+  qtyLoadingForNextLink: PropTypes.number.isRequired,
 };
 
 export default Card;

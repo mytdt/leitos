@@ -40,8 +40,15 @@ export default class Regions extends Component {
   render() {
     const { loading, regions } = this.state;
 
+    const numberOfRegions = 5;
+
     if (loading) {
-      return <Loading />;
+      const jsxLoading = [];
+      for (let i = 0; i < numberOfRegions; i += 1) {
+        jsxLoading.push(<Loading />);
+      }
+
+      return jsxLoading;
     }
 
     return (
