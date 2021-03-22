@@ -1,8 +1,15 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
+
+import * as Localidades from '../services/Localidades';
+
 import Loading from '../components/Loading';
 import RegionInfo from '../containers/RegionInfo';
-import * as Api from '../Services/Api';
 
+/**
+ * List all regions.
+ *
+ * @return {ReactElement} The markup to render
+ */
 export default class Regions extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +17,11 @@ export default class Regions extends Component {
     this.state = {
       loading: false,
       regions: [],
-    }
+    };
+  }
+
+  componentDidMount() {
+    this.getRegions();
   }
 
   async getRegions() {
@@ -18,16 +29,12 @@ export default class Regions extends Component {
       loading: true,
     });
 
-    const regions = await Api.getRegions();
+    const regions = await Localidades.getRegions();
 
     this.setState({
       loading: false,
       regions,
     });
-  }
-
-  componentDidMount() {
-    this.getRegions();
   }
 
   render() {
@@ -38,9 +45,7 @@ export default class Regions extends Component {
     }
 
     return (
-      regions.map((region) => {
-        return <RegionInfo key={region.id} region={region}/>;
-      })
+      regions.map((region) => <RegionInfo key={ region.id } region={ region } />)
     );
   }
 }
