@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Select from '../components/Card/Select';
-import Info from '../components/Card/Info';
+import Select from '../components/card/Select';
+import Info from '../components/card/Info';
 
 import constants from '../constants';
+import removeAccents from '../utils/remove-accents';
 
 import './Card.scss';
 
@@ -48,6 +49,10 @@ export default class Card extends React.Component {
     });
   }
 
+  convertLink(link) {
+    return removeAccents(link).replace(/\s/g, '+').toLowerCase();
+  }
+
   render() {
     const { region, info, link, qtyLoadingForNextLink } = this.props;
     const { showInfo } = this.state;
@@ -65,7 +70,7 @@ export default class Card extends React.Component {
     const dispHospUti = ofertaHospUti - ocupHospUti;
 
     const linkParams = {
-      pathname: link,
+      pathname: this.convertLink(link),
       props: {
         qtyLoadingForNextLink,
         region,

@@ -13,8 +13,8 @@ import './Select.scss';
  */
 const Select = ({ select }) => (
   <div className="card-select">
-    <select onChange={ select }>
-      <option value={ constants.icuBeds } selected>Leitos de UTI</option>
+    <select onChange={ select } defaultValue={ constants.icuBeds }>
+      <option value={ constants.icuBeds }>Leitos de UTI</option>
       <option value={ constants.clinicalBeds }>Leitos Clínicos</option>
       <option value={ constants.dischargesDeaths }>Altas e Óbitos</option>
     </select>
