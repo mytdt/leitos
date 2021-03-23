@@ -1,15 +1,24 @@
 {
   "plugins": [
-    "stylelint-order"
+    "stylelint-order",
+    "stylelint-scss"
   ],
   "rules": {
-    "at-rule-empty-line-before": "always",
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "blockless-after-same-name-blockless",
+          "first-nested"
+        ]
+      }
+    ],
     "at-rule-name-case": "lower",
     "at-rule-name-space-after": "always",
-    "at-rule-no-unknown": true,
+    "at-rule-no-unknown": null,
     "at-rule-no-vendor-prefix": true,
     "at-rule-semicolon-newline-after": "always",
-    "at-rule-semicolon-space-before": "always",
+    "at-rule-semicolon-space-before": "never",
     "block-closing-brace-newline-after": "always",
     "block-no-empty": true,
     "block-opening-brace-space-after": "always-single-line",
@@ -33,7 +42,14 @@
     "declaration-block-single-line-max-declarations": 1,
     "declaration-block-trailing-semicolon": "always",
     "declaration-colon-space-after": "always",
-    "declaration-empty-line-before": "never",
+    "declaration-empty-line-before": [
+      "never",
+      {
+        "ignore": [
+          "first-nested"
+        ]
+      }
+    ],
     "declaration-no-important": true,
     "font-family-name-quotes": "always-where-required",
     "font-family-no-duplicate-names": true,
@@ -93,6 +109,17 @@
       {
         "except": [
           "after-single-line-comment"
+        ]
+      }
+    ],
+    "scss/at-rule-no-unknown": true,
+    "scss/at-mixin-argumentless-call-parentheses": "always",
+    "scss/dollar-variable-empty-line-after": [
+      "always",
+      {
+        "except": [
+          "before-dollar-variable",
+          "last-nested"
         ]
       }
     ],

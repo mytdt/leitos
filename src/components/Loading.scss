@@ -1,20 +1,23 @@
 @keyframes loading {
+
   100% {
     transform: translateX(100%);
   }
 }
 
-@mixin loading-animation {
+@mixin loading-animation($position: relative) {
   background-color: rgba(0, 0, 0, 0.04);
   border-radius: 4px;
-  height: 1rem;
   margin: 0;
+  min-height: 1rem;
   overflow: hidden;
-  position: relative;
+  position: $position;
 
-  &::after {
+  $animationColor: rgba(255, 255, 255, 0.45);
+
+  &:after {
     animation: loading 1.5s infinite;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+    background: linear-gradient(90deg, transparent, $animationColor, transparent);
     content: '';
     display: block;
     height: 100%;
@@ -36,23 +39,23 @@
   width: 320px;
 
   .loading-header {
-    @include loading-animation;
-
     height: 1.2rem;
     justify-content: space-between;
     margin-bottom: 0.5rem;
     margin-right: 8rem;
     width: 60%;
+
+    @include loading-animation();
   }
 
   .loading-select {
-    @include loading-animation;
-
     height: 2rem;
     position: absolute;
     right: 1rem;
     top: 0.8rem;
     width: 120px;
+
+    @include loading-animation();
   }
 
   .loading-info {
@@ -71,20 +74,19 @@
     }
 
     & .info-value {
-      @include loading-animation;
-
-      width: 120px;
       height: 3.5rem;
+      width: 120px;
+
+      @include loading-animation();
     }
   }
 
   .loading-link {
-    @include loading-animation;
-
     bottom: 0.8rem;
     height: 1rem;
-    position: absolute;
     right: 1rem;
     width: 100px;
+
+    @include loading-animation(absolute);
   }
 }
