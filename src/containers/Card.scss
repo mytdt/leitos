@@ -1,0 +1,39 @@
+.card-container {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  height: 162px;
+  margin: 0.55rem;
+  min-width: 290px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  width: 320px;
+
+  .card-header {
+    color: #7b858e;
+    font-weight: 900;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    margin-right: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-info-container {
+    position: relative;
+  }
+
+  & > a {
+    bottom: 0.8rem;
+    color: #4099de;
+    font-size: 0.8rem;
+    font-weight: 800;
+    position: absolute;
+    right: 1rem;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
