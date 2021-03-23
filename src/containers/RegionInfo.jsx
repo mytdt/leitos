@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as Localidades from '../services/Localidades';
 import * as Leitos from '../services/Leitos';
 
-import Card from '../components/Card';
+import Card from './Card';
 import Loading from '../components/Loading';
 
 import consolidateInfo from '../utils/consolidate-info';

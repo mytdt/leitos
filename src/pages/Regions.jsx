@@ -45,7 +45,7 @@ export default class Regions extends Component {
     if (loading) {
       const jsxLoading = [];
       for (let i = 0; i < numberOfRegions; i += 1) {
-        jsxLoading.push(<Loading />);
+        jsxLoading.push(<Loading key={ i } />);
       }
 
       return jsxLoading;

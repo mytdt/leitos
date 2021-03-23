@@ -6,10 +6,13 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-transition-group": "^4.4.1",
+    "stylelint-scss": "^3.19.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -19,8 +22,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
     "lint:fix": "eslint --fix --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
-    "lint:styles": "npx stylelint \"**/*.css\"",
-    "lint:styles:fix": "npx stylelint \"**/*.css\" --fix"
+    "lint:styles": "npx stylelint \"**/*.scss\"",
+    "lint:styles:fix": "npx stylelint \"**/*.scss\" --fix"
   },
   "eslintConfig": {
     "extends": [
