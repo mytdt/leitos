@@ -6,8 +6,6 @@ const Loading = () => (
   <div className="loading-container">
     <div className="loading-header" />
 
-    {/* <div className="loading-select" /> */}
-
     <div className="loading-info">
       <div className="info-left">
         <div className="info-value" />

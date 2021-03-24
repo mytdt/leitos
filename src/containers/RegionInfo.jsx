@@ -72,7 +72,7 @@ export default class RegionInfo extends React.Component {
     }
 
     const { region } = this.props;
-    const link = `/${region.nome.toLowerCase()}`;
+    const link = `/${region.nome}`;
 
     const props = {
       region,

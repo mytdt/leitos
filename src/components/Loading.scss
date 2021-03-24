@@ -48,16 +48,6 @@
     @include loading-animation();
   }
 
-  .loading-select {
-    height: 2rem;
-    position: absolute;
-    right: 1rem;
-    top: 0.8rem;
-    width: 120px;
-
-    @include loading-animation();
-  }
-
   .loading-info {
     display: flex;
     flex-flow: row wrap;
