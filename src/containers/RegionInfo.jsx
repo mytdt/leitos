@@ -22,7 +22,7 @@ export default class RegionInfo extends React.Component {
     super(props);
 
     this.state = {
-      loading: false,
+      loading: true,
       numberOfStates: 0,
       info: {
         ofertaHospCli: 0,
