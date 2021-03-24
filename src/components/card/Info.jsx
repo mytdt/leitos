@@ -40,7 +40,20 @@ const Info = ({ infos, show }) => {
                 <span className="info-value" title={ value }>
                   { value }
                 </span>
-                <span className="info-name">{ singleInfo.name }</span>
+                <span className="info-name">
+                  { singleInfo.name }
+                  { typeof singleInfo.percentage !== 'undefined'
+                    ? (
+                      <>
+                        { ' ~ ' }
+                        <span className={ singleInfo.percentage.class }>
+                          { singleInfo.percentage.value }
+                          %
+                        </span>
+                      </>
+                    )
+                    : null }
+                </span>
               </div>
             );
           })
@@ -55,6 +68,10 @@ Info.propTypes = {
     PropTypes.shape({
       value: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
+      percentage: PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        class: PropTypes.string.isRequired,
+      }),
     }),
   ).isRequired,
   show: PropTypes.bool.isRequired,

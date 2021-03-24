@@ -34,6 +34,74 @@ export default class Card extends React.Component {
     this.selectInfo = this.selectInfo.bind(this);
   }
 
+  bedsInfo(offer, occupation) {
+    const percOccupation = this.calculatePercentage(occupation, offer);
+    const percAvailable = 100 - percOccupation;
+
+    let available = offer - occupation;
+    if (available < 0) {
+      available = 0;
+    }
+
+    return [
+      {
+        name: 'Ofertados',
+        value: offer,
+      },
+      {
+        name: 'Ocupados',
+        value: occupation,
+        percentage: {
+          value: percOccupation,
+          class: this.cssClass(percOccupation, 'low'),
+        },
+      },
+      {
+        name: 'Disponíveis',
+        value: available,
+        percentage: {
+          value: percAvailable,
+          class: this.cssClass(percAvailable, 'high'),
+        },
+      },
+    ];
+  }
+
+  calculatePercentage(value, total) {
+    if (value > total) {
+      return 100;
+    }
+
+    if (value < 0) {
+      return 0;
+    }
+
+    return parseInt((value * 100) / total, 10);
+  }
+
+  convertLink(link) {
+    return removeAccents(link).replace(/\s/g, '+').toLowerCase();
+  }
+
+  cssClass(percentage, better) {
+    const betterOptions = ['low', 'high'];
+
+    if (betterOptions.indexOf(better) === -1) {
+      return '';
+    }
+
+    const percentageOptions = {
+      high: [10, 25, 50, 100], // eslint-disable-line no-magic-numbers
+      low: [50, 75, 90, 100], // eslint-disable-line no-magic-numbers
+    };
+
+    for (let i = 0; i < percentageOptions[better].length; i += 1) {
+      if (percentage <= percentageOptions[better][i]) {
+        return `${better}-perc-lte-${percentageOptions[better][i]}`;
+      }
+    }
+  }
+
   selectInfo(event) {
     const selected = event.target.value;
 
@@ -49,10 +117,6 @@ export default class Card extends React.Component {
     });
   }
 
-  convertLink(link) {
-    return removeAccents(link).replace(/\s/g, '+').toLowerCase();
-  }
-
   render() {
     const { region, info, link, qtyLoadingForNextLink } = this.props;
     const { showInfo } = this.state;
@@ -66,9 +130,6 @@ export default class Card extends React.Component {
       obitos,
     } = info;
 
-    const dispHospCli = ofertaHospCli - ocupHospCli;
-    const dispHospUti = ofertaHospUti - ocupHospUti;
-
     const linkParams = {
       pathname: this.convertLink(link),
       props: {
@@ -77,22 +138,14 @@ export default class Card extends React.Component {
       },
     };
 
-    const clinicalBeds = {
-      show: showInfo[constants.clinicalBeds],
-      infos: [
-        { name: 'Ofertados', value: ofertaHospCli },
-        { name: 'Ocupados', value: ocupHospCli },
-        { name: 'Disponíveis', value: dispHospCli },
-      ],
-    };
-
     const icuBeds = {
       show: showInfo[constants.icuBeds],
-      infos: [
-        { name: 'Ofertados', value: ofertaHospUti },
-        { name: 'Ocupados', value: ocupHospUti },
-        { name: 'Disponíveis', value: dispHospUti },
-      ],
+      infos: this.bedsInfo(ofertaHospUti, ocupHospUti),
+    };
+
+    const clinicalBeds = {
+      show: showInfo[constants.clinicalBeds],
+      infos: this.bedsInfo(ofertaHospCli, ocupHospCli),
     };
 
     const dischargesDeaths = {
@@ -112,8 +165,8 @@ export default class Card extends React.Component {
         <Select select={ this.selectInfo } />
 
         <div className="card-info-container">
-          <Info { ...clinicalBeds } />
           <Info { ...icuBeds } />
+          <Info { ...clinicalBeds } />
           <Info { ...dischargesDeaths } />
         </div>
 
