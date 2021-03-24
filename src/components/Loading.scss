@@ -39,11 +39,14 @@
   width: 320px;
 
   .loading-header {
-    height: 1.2rem;
+    height: 1.4rem;
     justify-content: space-between;
     margin-bottom: 0.5rem;
     margin-right: 8rem;
+    position: relative;
+    top: -1px;
     width: 60%;
+
 
     @include loading-animation();
   }
@@ -55,7 +58,7 @@
     & > div {
       display: flex;
       flex-flow: column nowrap;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
       width: calc(50% - 0.75rem);
     }
 
@@ -65,6 +68,8 @@
 
     & .info-value {
       height: 3.5rem;
+      position: relative;
+      top: 10px;
       width: 120px;
 
       @include loading-animation();

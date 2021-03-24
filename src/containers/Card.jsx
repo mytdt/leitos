@@ -68,12 +68,12 @@ export default class Card extends React.Component {
   }
 
   calculatePercentage(value, total) {
-    if (value > total) {
-      return 100;
+    if (value <= 0 || total === 0) {
+      return 0;
     }
 
-    if (value < 0) {
-      return 0;
+    if (value > total) {
+      return 100;
     }
 
     return parseInt((value * 100) / total, 10);
@@ -159,7 +159,7 @@ export default class Card extends React.Component {
     return (
       <div className="card-container">
         <div className="card-header" title={ region.nome }>
-          {region.nome}
+          { region.nome }
         </div>
 
         <Select select={ this.selectInfo } />
