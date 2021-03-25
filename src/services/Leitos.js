@@ -64,3 +64,33 @@ export async function doFetchBySingleState(acronymState) {
 
   return result.hits;
 }
+
+/**
+ * Get data from multiples cities hospitals.
+ *
+ * @param {Array}  cityName      City's name.
+ * @param {String} acronymState  State's acronym.
+ * @return {Array}               Hospital's data.
+ */
+export async function doFetchByCity(cityName, acronymState) {
+  const query = {
+    bool: {
+      must: [
+        {
+          query_string: {
+            query: `estadoSigla:"${acronymState}"`,
+          },
+        },
+        {
+          query_string: {
+            query: `municipio:"${cityName}"`,
+          },
+        },
+      ],
+    },
+  };
+
+  const result = await doFetch(query);
+
+  return result.hits;
+}
