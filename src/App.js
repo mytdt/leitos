@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Regions from './pages/Regions';
 import States from './pages/States';
-// import Cities from './pages/Cities';
+import Cities from './pages/Cities';
 // import Hospitals from './pages/Hospitals';
 
 import './App.css';
+import About from './pages/About';
 
 function App() {
   return (
@@ -19,19 +20,19 @@ function App() {
         />
         <Route
           exact
-          path="/:region"
-          render={ (props) => <States { ...props } /> }
-        />
-        {/* <Route
-          exact
-          path='/:region/:state'
-          render={ (props) => <Cities { ...props } />}
+          path="/about"
+          render={ (props) => <About { ...props } /> }
         />
         <Route
           exact
-          path='/:region/:state/:city'
-          render={ (props) => <Hospitals { ...props } />}
-        /> */}
+          path="/:region"
+          render={ (props) => <States { ...props } /> }
+        />
+        <Route
+          exact
+          path="/:region/:state"
+          render={ (props) => <Cities { ...props } /> }
+        />
       </Switch>
     </Router>
   );
