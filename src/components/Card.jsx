@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './Card.css';
 
@@ -12,7 +13,7 @@ import './Card.css';
  * @param  {String}       props.qtyLoadingForNextLink Card link to more details
  * @return {ReactElement}                             The markup to render
  */
-const Card = ({ name, info, children }) => {
+const Card = ({ region, info, link, qtyLoadingForNextLink }) => {
   const {
     ofertaHospCli,
     ofertaHospUti,
@@ -22,11 +23,19 @@ const Card = ({ name, info, children }) => {
     obitos,
   } = info;
 
+  const linkParams = {
+    pathname: link,
+    props: {
+      qtyLoadingForNextLink,
+      region,
+    },
+  };
+
   return (
     <section className="container-card">
       <div className="header-card">
         <h3>
-          {name}
+          {region.nome}
         </h3>
       </div>
       <div>
@@ -75,13 +84,17 @@ const Card = ({ name, info, children }) => {
           </p>
         </section>
       </div>
-      { children }
+      <Link to={ linkParams }>+ DETALHES</Link>
     </section>
   );
 };
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
+  region: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    sigla: PropTypes.string.isRequired,
+    nome: PropTypes.string.isRequired,
+  }).isRequired,
   info: PropTypes.shape({
     ofertaHospCli: PropTypes.number.isRequired,
     ofertaHospUti: PropTypes.number.isRequired,
@@ -90,7 +103,8 @@ Card.propTypes = {
     altas: PropTypes.number.isRequired,
     obitos: PropTypes.number.isRequired,
   }).isRequired,
-  children: PropTypes.node.isRequired,
+  link: PropTypes.string.isRequired,
+  qtyLoadingForNextLink: PropTypes.number.isRequired,
 };
 
 export default Card;

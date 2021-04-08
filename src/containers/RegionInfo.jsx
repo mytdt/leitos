@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import * as Localidades from '../services/Localidades';
 import * as Leitos from '../services/Leitos';
@@ -23,7 +22,7 @@ export default class RegionInfo extends React.Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: false,
       numberOfStates: 0,
       info: {
         ofertaHospCli: 0,
@@ -73,20 +72,16 @@ export default class RegionInfo extends React.Component {
     }
 
     const { region } = this.props;
+    const link = `/${region.nome.toLowerCase()}`;
 
-    const linkParams = {
-      pathname: `/${region.nome}`,
-      props: {
-        region,
-        qtyLoadingForNextLink: numberOfStates,
-      },
+    const props = {
+      region,
+      info,
+      link,
+      qtyLoadingForNextLink: numberOfStates,
     };
 
-    return (
-      <Card name={ region.nome } info={ info }>
-        <Link to={ linkParams }>Mais Detalhes!</Link>
-      </Card>
-    );
+    return <Card { ...props } />;
   }
 }
 

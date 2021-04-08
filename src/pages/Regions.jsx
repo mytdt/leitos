@@ -15,7 +15,7 @@ export default class Regions extends Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: false,
       regions: [],
     };
   }
