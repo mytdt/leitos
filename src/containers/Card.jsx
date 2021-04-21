@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import Select from '../components/card/Select';
 import Info from '../components/card/Info';
@@ -8,35 +9,45 @@ import Info from '../components/card/Info';
 import constants from '../constants';
 import removeAccents from '../utils/remove-accents';
 
-import './Card.scss';
+import '../styles/Card.scss';
 
 /**
  * Card component that renders a single card.
  *
- * @param  {String}       props.region                Region data
- * @param  {Object}       props.info                  Card info to display
- * @param  {String}       props.link                  Card link to more details
- * @param  {String}       props.qtyLoadingForNextLink Card link to more details
- * @return {ReactElement}                             The markup to render
+ * @param  {String}       props.name Card name
+ * @param  {Object}       props.info Card info to display
+ * @param  {String}       props.link Card link to more details
+ * @return {ReactElement}            The markup to render
  */
-export default class Card extends React.Component {
+class Card extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       showInfo: {
-        [constants.clinicalBeds]: false,
         [constants.icuBeds]: true,
+        [constants.clinicalBeds]: false,
         [constants.dischargesDeaths]: false,
       },
     };
 
     this.selectInfo = this.selectInfo.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    const enterKey = 13;
+
+    if (event.type === 'keydown' && event.keyCode !== enterKey) {
+      return;
+    }
+
+    event.target.classList.toggle('only-header');
   }
 
   bedsInfo(offer, occupation) {
     const percOccupation = this.calculatePercentage(occupation, offer);
-    const percAvailable = 100 - percOccupation;
+    const percAvailable = (offer === 0) ? 0 : (100 - percOccupation);
 
     let available = offer - occupation;
     if (available < 0) {
@@ -68,6 +79,10 @@ export default class Card extends React.Component {
   }
 
   calculatePercentage(value, total) {
+    if (total === 0 && value > 0) {
+      return 100;
+    }
+
     if (value <= 0 || total === 0) {
       return 0;
     }
@@ -106,8 +121,8 @@ export default class Card extends React.Component {
     const selected = event.target.value;
 
     const showInfo = {
-      [constants.clinicalBeds]: false,
       [constants.icuBeds]: false,
+      [constants.clinicalBeds]: false,
       [constants.dischargesDeaths]: false,
     };
     showInfo[selected] = true;
@@ -118,7 +133,7 @@ export default class Card extends React.Component {
   }
 
   render() {
-    const { region, info, link, qtyLoadingForNextLink } = this.props;
+    const { name, info, link, notification } = this.props;
     const { showInfo } = this.state;
 
     const {
@@ -129,14 +144,6 @@ export default class Card extends React.Component {
       altas,
       obitos,
     } = info;
-
-    const linkParams = {
-      pathname: this.convertLink(link),
-      props: {
-        qtyLoadingForNextLink,
-        region,
-      },
-    };
 
     const icuBeds = {
       show: showInfo[constants.icuBeds],
@@ -156,10 +163,31 @@ export default class Card extends React.Component {
       ],
     };
 
+    let momentNotification = null;
+    let notificationDate = null;
+    let notificationRelative = null;
+
+    if (notification) {
+      momentNotification = moment(notification);
+      notificationDate = momentNotification.format('DD/MM/YYYY HH:mm:ss');
+      notificationRelative = `atualizado ${momentNotification.fromNow()}`;
+
+      if (!momentNotification.isValid()) {
+        notificationDate = 'última notificação não informada';
+        notificationRelative = 'sem dados de atualização';
+      }
+    }
+
     return (
-      <div className="card-container">
-        <div className="card-header" title={ region.nome }>
-          { region.nome }
+      <div
+        className="card-container"
+        onClick={ this.handleClick }
+        onKeyDown={ this.handleClick }
+        role="button"
+        tabIndex="0"
+      >
+        <div className="card-header" title={ name }>
+          { name }
         </div>
 
         <Select select={ this.selectInfo } />
@@ -170,18 +198,23 @@ export default class Card extends React.Component {
           <Info { ...dischargesDeaths } />
         </div>
 
-        <Link to={ linkParams }>mais detalhes</Link>
+        { (!link)
+          ? null
+          : <Link to={ this.convertLink(link) }>mais detalhes</Link> }
+        { (!notification)
+          ? null
+          : (
+            <div className="card-notification" title={ notificationDate }>
+              { notificationRelative }
+            </div>
+          ) }
       </div>
     );
   }
 }
 
 Card.propTypes = {
-  region: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    sigla: PropTypes.string.isRequired,
-    nome: PropTypes.string.isRequired,
-  }).isRequired,
+  name: PropTypes.string.isRequired,
   info: PropTypes.shape({
     ofertaHospCli: PropTypes.number.isRequired,
     ofertaHospUti: PropTypes.number.isRequired,
@@ -190,6 +223,13 @@ Card.propTypes = {
     altas: PropTypes.number.isRequired,
     obitos: PropTypes.number.isRequired,
   }).isRequired,
-  link: PropTypes.string.isRequired,
-  qtyLoadingForNextLink: PropTypes.number.isRequired,
+  link: PropTypes.string,
+  notification: PropTypes.string,
 };
+
+Card.defaultProps = {
+  link: null,
+  notification: null,
+};
+
+export default Card;

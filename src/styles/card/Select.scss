@@ -4,6 +4,7 @@
     position: absolute;
     right: 1rem;
     top: 0.8rem;
+    user-select: none;
 
     & > select {
       appearance: none;

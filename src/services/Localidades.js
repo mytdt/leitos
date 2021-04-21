@@ -1,7 +1,7 @@
 /**
- * Get all brazilian regions from de localidades do IBGE API.
+ * Get all brazilian regions from IBGE API.
  *
- * @return {Array}  brazilian regions.
+ * @return {Array} Brazilian regions.
  */
 export async function getRegions() {
   const endPoint = 'https://servicodados.ibge.gov.br/api/v1/localidades/regioes/';
@@ -15,7 +15,7 @@ export async function getRegions() {
 /**
  * Get states from a region.
  *
- * @param {Number} regionId Region's Id to query.
+ * @param {Number} regionId Region's id to query.
  * @return {Array}          Region's states.
  */
 export async function getStatesByRegion(regionId) {
@@ -30,14 +30,21 @@ export async function getStatesByRegion(regionId) {
 /**
  * Get cities from a state.
  *
- * @param {String} stateId State's Id to query.
+ * @param {String} stateId State's id to query.
  * @return {Array}         State's cities.
  */
-export async function getCitiesByState(StateId) {
-  const endPoint = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${StateId}/municipios`;
+export async function getCitiesByState(stateId) {
+  const endPoint = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`;
   const result = await fetch(endPoint)
     .then((response) => response.json())
     .then((json) => json);
 
-  return result;
+  const cities = result.map((city) => (
+    {
+      id: city.id,
+      name: city.nome,
+    }
+  ));
+
+  return cities;
 }

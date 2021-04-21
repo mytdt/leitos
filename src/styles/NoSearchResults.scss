@@ -1,0 +1,17 @@
+.page-no-search-results {
+  color: rgba(255, 0, 0, 0.5);
+  font-family: Raleway, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  max-width: 415px;
+  padding: 1rem 2rem 4rem;
+  text-align: center;
+
+  & > div {
+    color: black;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+}

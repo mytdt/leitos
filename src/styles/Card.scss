@@ -2,12 +2,15 @@
   background-color: white;
   border-radius: 6px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
   height: 162px;
   margin: 0.55rem;
-  min-width: 290px;
+  outline: none;
+  overflow: hidden;
   padding: 1.25rem 1.5rem;
   position: relative;
   width: 320px;
+
 
   .card-header {
     color: #7b858e;
@@ -17,24 +20,52 @@
     margin-bottom: 0.5rem;
     margin-right: 8rem;
     overflow: hidden;
+    pointer-events: none;
     position: relative;
     text-overflow: ellipsis;
     top: -3px;
+    user-select: none;
     white-space: nowrap;
   }
 
   .card-info-container {
+    pointer-events: none;
     position: relative;
+    user-select: none;
   }
 
-  & > a {
-    bottom: 0.8rem;
+  &.only-header {
+
+    .card-header {
+      margin-right: 0;
+      overflow: auto;
+      white-space: normal;
+    }
+
+    .card-select {
+      display: none;
+    }
+
+    .card-info-container {
+      display: none;
+    }
+  }
+
+  .card-notification {
+    pointer-events: none;
+  }
+
+  & > a,
+  .card-notification {
+    bottom: 0;
     color: #4099de;
     font-size: 0.8rem;
     font-weight: 800;
+    padding: 0.5rem 1rem 0.8rem 0.5rem;
     position: absolute;
-    right: 1rem;
+    right: 0;
     text-decoration: none;
+    user-select: none;
 
     &:hover {
       opacity: 0.5;

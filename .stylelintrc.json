@@ -130,7 +130,7 @@
     "selector-combinator-space-after": "always",
     "selector-combinator-space-before": "always",
     "selector-descendant-combinator-no-non-space": true,
-    "selector-list-comma-space-after": "always",
+    "selector-list-comma-space-after": "always-single-line",
     "selector-list-comma-space-before": "never",
     "selector-max-attribute": 3,
     "selector-max-class": 5,

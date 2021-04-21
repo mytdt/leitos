@@ -27,17 +27,6 @@ async function doFetch(query) {
 }
 
 /**
- * Get data from all brazilian's hospitals.
- *
- * @return {Array} Hospital's data.
- */
-export async function doFetchAll() {
-  const result = await doFetch({ match_all: {} });
-
-  return result;
-}
-
-/**
  * Get data from multiples state's hospitals.
  *
  * @param {Array} acronymStates States acronyms.

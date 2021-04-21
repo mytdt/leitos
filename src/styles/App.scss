@@ -1,0 +1,33 @@
+.page-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: auto;
+  max-width: calc(960px + 12.3rem);
+  padding: 10rem 2.5rem 1rem;
+  position: relative;
+
+  @media only screen and ( max-width : 480px ) {
+    padding: 10rem 0.55rem 1rem;
+  }
+
+  .page-no-info {
+    color: rgba(255, 0, 0, 0.5);
+    font-family: Raleway, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
+      Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+      sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    max-width: 415px;
+    padding: 0 2rem 4rem;
+    position: relative;
+    text-align: center;
+    top: -2rem;
+
+    & > div {
+      color: black;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}

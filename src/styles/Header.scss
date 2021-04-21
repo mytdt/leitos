@@ -1,0 +1,134 @@
+.header {
+  font-family: Raleway, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  font-weight: 200;
+  padding: 6rem 0;
+  text-align: center;
+
+  @media only screen and ( max-width : 480px ) {
+    padding: 4rem 0;
+  }
+
+  .bar {
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    display: flex;
+    height: 2rem;
+    justify-content: space-between;
+    left: 0;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    transition: background-color 300ms, box-shadow 300ms;
+    width: calc(100% - 2rem);
+    will-change: background-color, box-shadow;
+    z-index: 999;
+
+    &.transparent {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .bar-left {
+      flex: 0 1 auto;
+      margin: auto;
+      text-align: left;
+      width: 200px;
+    }
+
+    .bar-left .link {
+      position: relative;
+    }
+
+    .bar-left .link.has-icon {
+      padding-left: 1.23rem;
+    }
+
+    .bar-left svg {
+      fill: currentColor;
+      height: 16px;
+      left: 0;
+      position: absolute;
+      top: 1px;
+      width: 16px;
+    }
+
+    .bar-center {
+      flex: 1 0 auto;
+      font-size: 2rem;
+      line-height: 2rem;
+      margin: auto 2rem;
+      opacity: 1;
+      transition: opacity 300ms;
+      will-change: opacity;
+    }
+
+    &.transparent .bar-center {
+      opacity: 0;
+    }
+
+    .bar-right {
+      align-items: center;
+      display: flex;
+      flex: 0 1 auto;
+      justify-content: flex-end;
+      text-align: right;
+      width: 200px;
+    }
+
+    .bar-right .about {
+      margin-right: 2rem;
+    }
+
+    .bar-right > span {
+      height: 28px;
+    }
+  }
+
+  @media only screen and ( max-width : 868px ) {
+
+    .bar .bar-right .about {
+      margin-right: 0;
+    }
+
+    .bar .bar-right > span {
+      display: none;
+    }
+  }
+
+  .title {
+    display: inline-block;
+    font-size: 6rem;
+    opacity: 1;
+    position: relative;
+    transition: opacity 200ms;
+    will-change: opacity;
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    opacity: 1;
+    transition: opacity 200ms;
+    will-change: opacity;
+
+    &.hide {
+      opacity: 0;
+    }
+  }
+
+  a {
+    color: #4099de;
+    font-weight: 400;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
