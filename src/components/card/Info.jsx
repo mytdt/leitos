@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
-import './Info.scss';
+import '../../styles/card/Info.scss';
 
 /**
  * Information component that renders inside a card.

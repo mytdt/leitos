@@ -5,6 +5,7 @@
     flex-flow: row wrap;
     position: absolute;
     width: 100%;
+    will-change: opacity, transform;
 
     &.enter, &.appear {
       opacity: 0;

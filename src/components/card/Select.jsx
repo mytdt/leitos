@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import constants from '../../constants';
 
-import './Select.scss';
+import { ReactComponent as SelectArrow } from '../../icons/select-arrow.svg';
+
+import '../../styles/card/Select.scss';
 
 /**
  * Select component that renders inside a card.
@@ -18,10 +20,7 @@ const Select = ({ select }) => (
       <option value={ constants.clinicalBeds }>Leitos Clínicos</option>
       <option value={ constants.dischargesDeaths }>Altas e Óbitos</option>
     </select>
-    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M 7 14 L 12 22 L 17 14 Z" />
-      <path d="M 7 10 L 12 2 L 17 10 Z" />
-    </svg>
+    <SelectArrow focusable="false" aria-hidden="true" />
   </div>
 );
 

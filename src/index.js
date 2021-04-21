@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import moment from 'moment';
+import 'moment/locale/pt-br';
+
 import App from './App';
+
 import reportWebVitals from './reportWebVitals';
+
+import './styles/index.scss';
+
+moment.locale('pt-br');
 
 ReactDOM.render(
   <React.StrictMode>

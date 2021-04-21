@@ -1,11 +1,7 @@
-const clinicalBeds = 'leitos-clinicos';
-
-const icuBeds = 'leitos-uti';
-
-const dischargesDeaths = 'altas-obitos';
+import leitos from './leitos';
+import ibge from './ibge';
 
 export default {
-  clinicalBeds,
-  icuBeds,
-  dischargesDeaths,
+  ...leitos,
+  ...ibge,
 };

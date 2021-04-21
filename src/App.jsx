@@ -1,42 +1,37 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Regions from './pages/Regions';
-import States from './pages/States';
-// import Cities from './pages/Cities';
-// import Hospitals from './pages/Hospitals';
+import ScrollHandler from './containers/ScrollHandler';
 
-import './App.scss';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <Router>
-      <div className="page-container">
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={ (props) => <Regions { ...props } /> }
-          />
-          <Route
-            exact
-            path="/:region"
-            render={ (props) => <States { ...props } /> }
-          />
-          {/* <Route
-            exact
-            path='/:region/:state'
-            render={ (props) => <Cities { ...props } />}
-          />
-          <Route
-            exact
-            path='/:region/:state/:city'
-            render={ (props) => <Hospitals { ...props } />}
-          /> */}
-        </Switch>
-      </div>
-    </Router>
-  );
-}
+import Brazil from './pages/Brazil';
+import Region from './pages/Region';
+import State from './pages/State';
+import City from './pages/City';
+// import About from './pages/About';
+
+import './styles/App.scss';
+
+const App = () => (
+  <Router>
+    <ScrollHandler />
+
+    <Header />
+
+    <div className="page-container">
+      <Switch>
+        <Route path="/:region/:state/:city" component={ City } />
+        <Route path="/:region/:state" component={ State } />
+        <Route path="/:region" component={ Region } />
+        {/* <Route path="/sobre" component={ About } /> */}
+        <Route path="/" component={ Brazil } />
+      </Switch>
+    </div>
+
+    <Footer />
+  </Router>
+);
 
 export default App;

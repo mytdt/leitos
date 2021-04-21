@@ -3,30 +3,25 @@ import PropTypes from 'prop-types';
 
 import * as Leitos from '../services/Leitos';
 
-import Card from '../components/Card';
+import Card from './Card';
 import Loading from '../components/Loading';
 
 import consolidateInfo from '../utils/consolidate-info';
 
 /**
- * Informations about a specific state.
+ * Informations about a specific city.
  *
- * @param {Number} props.region.id    Id of region
- * @param {String} props.region.sigla Acronym of region
- * @param {String} props.region.nome  Name of region
- * @return {ReactElement}             The markup to render
+ * @param {Number} props.city.id   Id of city
+ * @param {String} props.city.name Name of city
+ * @param {String} props.link      Link of current url
+ * @return {ReactElement}          The markup to render
  */
-export default class CityInfo extends React.Component {
+class CityInfo extends React.Component {
   constructor(props) {
     super(props);
-    const { props: inheritedInfo } = props;
-    const { city, state } = inheritedInfo;
 
     this.state = {
-      state,
-      city,
       loading: true,
-      numberOfHospitals: 0,
       info: {
         ofertaHospCli: 0,
         ofertaHospUti: 0,
@@ -36,55 +31,54 @@ export default class CityInfo extends React.Component {
         obitos: 0,
       },
     };
+
+    this.componentIsMounted = false;
   }
 
   componentDidMount() {
+    this.componentIsMounted = true;
     this.getInfo();
   }
 
+  componentWillUnmount() {
+    this.componentIsMounted = false;
+  }
+
   async getInfo() {
-    const { state, city } = this.state;
+    if (this.componentIsMounted) {
+      this.setState({
+        loading: true,
+      });
+    }
 
-    this.setState({
-      loading: true,
-    });
+    const { state, city } = this.props;
+    const hospitals = await Leitos.doFetchByCity(city.name, state.acronym);
 
-    const hospitals = await Leitos.doFetchByCity(city.nome, state.sigla);
+    if (this.componentIsMounted) {
+      const { info: initialInfo } = this.state;
+      const info = consolidateInfo(initialInfo, hospitals);
 
-    const { info: initialInfo } = this.state;
-
-    const info = consolidateInfo(initialInfo, hospitals);
-
-    this.setState({
-      loading: false,
-      numberOfHospitals: hospitals.length,
-      info,
-    });
+      this.setState({
+        loading: false,
+        info,
+      });
+    }
   }
 
   render() {
-    const { loading, numberOfHospitals, info } = this.state;
-
-    const numberOfRegions = 5;
+    const { city, link: currentLink } = this.props;
+    const { loading, info } = this.state;
 
     if (loading) {
-      const jsxLoading = [];
-      for (let i = 0; i < numberOfRegions; i += 1) {
-        jsxLoading.push(<Loading />);
-      }
-
-      return jsxLoading;
+      return <Loading />;
     }
 
-    const { link, city } = this.state;
-    // const link = `/${region.nome}/${state.nome}`;
-    // console.log(link);
+    const link = `${currentLink}/${city.name}`;
 
     const props = {
-      name: city.nome,
+      name: city.name,
       info,
       link,
-      qtyLoadingForNextLink: numberOfHospitals,
     };
 
     return <Card { ...props } />;
@@ -92,16 +86,16 @@ export default class CityInfo extends React.Component {
 }
 
 CityInfo.propTypes = {
-  props: PropTypes.shape({
-  }).isRequired,
-  region: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    sigla: PropTypes.string.isRequired,
-    nome: PropTypes.string.isRequired,
-  }).isRequired,
   state: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    sigla: PropTypes.string.isRequired,
-    nome: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    acronym: PropTypes.string.isRequired,
   }).isRequired,
+  city: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  link: PropTypes.string.isRequired,
 };
+
+export default CityInfo;

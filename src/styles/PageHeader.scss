@@ -1,0 +1,28 @@
+.page-header {
+  align-items: center;
+  background-color: #eef1f4;
+  display: flex;
+  flex-flow: column;
+  padding-bottom: 3rem;
+  position: absolute;
+  top: 0;
+  width: calc(100% - 2.2rem);
+
+  @media only screen and ( max-width : 868px ) {
+    max-width: calc(320px + 3rem);
+  }
+
+  .page-location {
+    align-items: center;
+    color: #7b858e;
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 700;
+    height: 3rem;
+    justify-content: center;
+    line-height: 1.5rem;
+    margin-bottom: 1.55rem;
+    overflow: hidden;
+    text-align: center;
+  }
+}

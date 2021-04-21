@@ -1,0 +1,23 @@
+.footer {
+  font-family: Raleway, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  font-weight: 200;
+  padding: 1rem 0;
+  text-align: center;
+
+  span {
+    font-weight: 400;
+  }
+
+  .mytdt {
+    display: block;
+    font-size: 0.9rem;
+    margin: 1rem;
+    text-decoration: none;
+
+    & > span {
+      color: #4099de;
+    }
+  }
+}
