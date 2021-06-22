@@ -1,0 +1,52 @@
+.about-card-profile {
+  display: block;
+  margin: 10px;
+  text-decoration: none;
+  color: #000000;
+  width: 200px;
+
+  .avatar {
+    background-color: white;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+    display: block;
+    width: 100%;
+  }
+
+  .profile {
+    align-items: center;
+    display: flex;
+    padding-top: 1.5rem;
+
+    svg {
+      flex: 0 0 auto;
+      width: 24px;
+    }
+
+    .info {
+      flex: 1 1 auto;
+      min-width: 1px;
+      padding-left: 1rem;
+    }
+
+    .info h4 {
+      color: #4099de;
+      font-weight: 900;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .info span {
+      display: block;
+      font-family: Raleway, system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
+        Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+        sans-serif;
+      font-size: 0.8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,27 +1,47 @@
 import React from 'react';
-import Git from '../services/Git';
+import Collapsible from 'react-collapsible';
+
 import CardProfile from '../components/about/Profile';
+
+import Git from '../services/Git';
+
 import '../styles/About.scss';
 
-export default class About extends React.Component {
+class About extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       contributors: [],
+      FAQ: [],
     };
 
-    this.isMountedComponent = false;
+    this.componentIsMounted = false;
   }
 
   componentDidMount() {
-    this.isMountedComponent = true;
+    this.componentIsMounted = true;
 
+    this.getFAQ();
     this.contributors();
   }
 
   componentWillUnmount() {
-    this.isMountedComponent = false;
+    this.componentIsMounted = false;
+  }
+
+  async getFAQ() {
+    const FAQ = await fetch('/data/faq.json')
+      .then((response) => response.json())
+      .then((json) => json);
+
+    if (!this.componentIsMounted) {
+      return;
+    }
+
+    this.setState({
+      FAQ,
+    });
   }
 
   async contributors() {
@@ -31,7 +51,7 @@ export default class About extends React.Component {
       contributors.map(({ login }) => Git.getSingleContributor(login)),
     );
 
-    if (!this.isMountedComponent) {
+    if (!this.componentIsMounted) {
       return;
     }
 
@@ -41,68 +61,51 @@ export default class About extends React.Component {
   }
 
   render() {
-    const { contributors } = this.state;
+    const { contributors, FAQ } = this.state;
 
     return (
-      <main className="main-about">
-        <section className="about-leitos">
-          <h1>Sobre o projeto Leitos</h1>
+      <div className="about-container">
+        <div className="about">
+          <h1>Sobre o projeto</h1>
           <p>
             Esse projeto foi desenvolvido voluntariamente a fim de trazer dados sobre
-            os leitos nos hospitais pelo Brasil. Tais dados incluem  ocupação e oferta
-            de leitos clínicos e leitos de uti.
+            os leitos nos hospitais do Brasil. Tais dados incluem oferta e ocupação
+            de leitos clínicos, de leitos de UTI e ainda informações de altas e óbitos.
           </p>
           <p>
-            Utilizamos o DataSus, o banco de dados alimentado pelos hospitais do
-            Brasil. Portanto toda informação disponibilizada pela nossa aplicação tem
-            confiabilidade e credibilidade do Sistema Único de Saúde.
+            Os dados são originados do openDataSUS que é um banco de dados alimentado
+            pelos próprios hospitais. Portanto, toda informação disponibilizada pela
+            aplicação tem confiabilidade e credibilidade do Sistema Único de Saúde.
           </p>
-        </section>
-        <section className="faq-leitos">
+        </div>
+
+        <div className="faq">
           <h1>FAQ</h1>
-          <details open>
-            <summary>
-              Por que os número de leitos ocupados são maiores que os ofertados?
-            </summary>
-            <div>
-              Nós dedusimos que o número de leitos ofertados foram introduzidos
-              antes do ápice da pandemia. E com a correria nos hospitais os
-              servidores apenas estão informando o número de leitos ocupados,
-              mesmo que outros estejam sendo criados, já são infromados como
-              ocupados.
-            </div>
-          </details>
-          <details>
-            <summary>
-              Essas informçãoes estão atualizadas?
-            </summary>
-            <div>
-              Todas as informações disponíveis foram passadas pelos os próprios
-              hospitais, logo algumas então atualizadas, outras não.
-            </div>
-          </details>
-          <details>
-            <summary>
-              Como posso verificar a data da última atualização?
-            </summary>
-            <div>
-              Para verificar a útima atualização, basta você clicar em Mais detalhes
-              na página da cidade que você está pesquisando.
-            </div>
-          </details>
-        </section>
-        <section className="collaborator-leitos">
-          <h1>
-            Colaboradores
-          </h1>
           {
-            contributors
-              .map(
-                (ctb) => <CardProfile key={ ctb.login } contributor={ ctb } />,
-              )
+            FAQ.map((faqItem, index) => (
+              <Collapsible
+                key={ index }
+                trigger={ faqItem.question }
+                transitionTime="350"
+                easing="ease"
+              >
+                { faqItem.answer }
+              </Collapsible>
+            ))
           }
-        </section>
-      </main>
+        </div>
+
+        <div className="contributors">
+          <h1>Colaboradores</h1>
+          {
+            contributors.map((item) => (
+              <CardProfile key={ item.login } contributor={ item } />
+            ))
+          }
+        </div>
+      </div>
     );
   }
 }
+
+export default About;

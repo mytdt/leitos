@@ -1,0 +1,30 @@
+[
+  {
+    "question": "Por que os números de leitos ocupados são maiores que os ofertados?",
+    "answer": "Acreditamos que o número de leitos ofertados não levam em consideração os novos leitos criados de forma emergencial para atender a pandemia da COVID-19. Provavelmente os leitos ofertados foram introduzidos antes do ápice da pandemia da COVID-19 e, durante a pandemia, os colaboradores dos hospitais estão informando apenas o número de leitos ocupados."
+  },
+  {
+    "question": "Essas informações estão atualizadas?",
+    "answer": "Todas as informações disponíveis são oriundas do openDataSUS e informadas pelos próprios hospitais. Em nossa análise percebemos que alguns hospitais possuem informações atualizadas e outros não. Acreditamos que depende de como os hospitais priorizam a inserção de dados no openDataSUS."
+  },
+  {
+    "question": "Como posso verificar a data da última atualização?",
+    "answer": "A data da última atualização é referente a cada hospital. Dessa forma, para verificar a última atualização, você deve clicar em \"mais detalhes\" na região, estado e cidade para listar os hospitais. Neste último nível será informado há quanto tempo ocorreu a última atualização. Você pode ainda colocar o mouse em cima do texto para verificar a data e hora exata."
+  },
+  {
+    "question": "Os dados são consultados em tempo real?",
+    "answer": "Depende. Na sua primeira visita em nosso site o openDataSUS é consultado em tempo real e os dados retornados são armazenados no navegador. Por questões de recursos técnicos, a atualização desses dados será efetuada automaticamente em sua próxima visita e somente após 24 horas. Entretanto, você poderá solicitar dados atualizados a qualquer momento clicando no botão de atualização da barra superior."
+  },
+  {
+    "question": "Por que não são exibidos os nomes completos de algumas cidades e hospitais?",
+    "answer": "Simplesmente devido ao design da aplicação. Entretanto você pode clicar no cartão para exibir o título completo do mesmo."
+  },
+  {
+    "question": "Por que alguns hospitais tem como nome apenas números?",
+    "answer": "Estes hospitais não possuem nome de identificação na base do openDataSUS. Dessa forma foi exibido o código CNES (Cadastro Nacional de Estabelecimentos de Saúde) do mesmo."
+  },
+  {
+    "question": "Por que alguns hospitais tem como nome a palavra \"Indefinido\"?",
+    "answer": "Estes hospitais não possuem nome de identificação na base do openDataSUS e nem o código CNES (Cadastro Nacional de Estabelecimentos de Saúde). Dessa forma não é possível identificá-los."
+  }
+]

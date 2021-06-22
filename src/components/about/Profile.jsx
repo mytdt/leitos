@@ -1,27 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import gitIcon from '../../images/git-icon.png';
+import { ReactComponent as GitIcon } from '../../icons/github.svg';
+
+import '../../styles/about/Profile.scss';
 
 const Profile = ({ contributor }) => (
-  <div className="about-card-profile">
-    <img src={ contributor.avatar_url } alt="Avatar icone" className="avatar" />
-    <div className="inf-profile">
-      <h4>{ contributor.name }</h4>
-      <span className="inf">
-        <img src={ gitIcon } alt="Git icone" className="git" />
-        <a href={ contributor.html_url } target="blank">
-          <p>{ contributor.login }</p>
-        </a>
-      </span>
+  <a href={ contributor.html_url } target="blank" className="about-card-profile">
+    <img src={ contributor.avatar_url } alt="Avatar" className="avatar" />
+    <div className="profile">
+      <GitIcon focusable="false" aria-hidden="true" />
+      <div className="info">
+        <h4>{ contributor.name }</h4>
+        <span>{ contributor.location }</span>
+      </div>
     </div>
-  </div>
+  </a>
 );
 
 Profile.propTypes = {
   contributor: PropTypes.shape({
     avatar_url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
     html_url: PropTypes.string.isRequired,
     login: PropTypes.string.isRequired,
   }).isRequired,
