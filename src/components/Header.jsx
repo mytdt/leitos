@@ -18,7 +18,13 @@ const Header = () => {
     { id: 3, name: 'Cidades' },
   ];
 
-  const currentLevel = levels.find((level) => level.id === pathLevel) || levels[0];
+  const [home] = levels;
+
+  let currentLevel = levels.find((level) => level.id === pathLevel) || home;
+
+  if (pathname === '/sobre') {
+    currentLevel = home;
+  }
 
   pathnameToArray.pop();
   const backLink = `/${pathnameToArray.join('/')}`;
@@ -50,7 +56,7 @@ const Header = () => {
         </div>
 
         <div className="bar-right">
-          <Link className="about" to="/about">Sobre</Link>
+          <Link className="about" to="/sobre">Sobre</Link>
 
           <GitHubButton
             href="https://github.com/mytdt/leitos"

@@ -1,92 +1,58 @@
-.main-about {
-  display: block;
-}
+.about-container {
+  margin-top: -10rem;
 
-.main-about section {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
+  .about {
+    text-align: justify;
 
-.about-leitos {
-  display: block;
-  padding-bottom: 4%;
-  text-align: justify;
-}
+    p {
+      margin: 16px;
+    }
+  }
 
-.faq-leitos {
-  padding-bottom: 4%;
-}
+  .faq,
+  .contributors {
+    padding-top: 1rem;
+  }
 
-.faq-leitos div {
-  text-align: justify;
-}
+  .Collapsible {
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    margin: 10px;
+    min-height: 22px;
+    position: relative;
 
-summary {
-  font-weight: 600;
-  background-color: #fff;
-  color: #333;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  outline: none;
-  border-radius: 0.25rem;
-  text-align: left;
-  cursor: pointer;
-  position: relative;
-}
-details > summary::after {
-  position: absolute;
-  content: "+";
-  right: 20px;
-}
-details[open] > summary::after {
-  position: absolute;
-  content: "-";
-  right: 20px;
-}
-details > summary::-webkit-details-marker {
-  display: none;
-}
+    &__trigger {
+      color: #7b858e;
+      cursor: pointer;
+      display: block;
+      font-weight: 900;
+      padding: 1.25rem 3.5rem 1.25rem 1.5rem;
+    }
 
-details[open] summary ~ * {
-  animation: sweep .5s ease-in-out;
-}
-@keyframes sweep {
-  0%    {opacity: 0; margin-top: -10px}
-  100%  {opacity: 1; margin-top: 0px}
-}
+    &__trigger:after {
+      background-color: #7b858e;
+      content: '';
+      display: block;
+      margin: 2px;
+      mask: url(../icons/left-arrow.svg);
+      position: absolute;
+      right: 1.25rem;
+      top: 1.25rem;
+      transform: rotateZ(-90deg);
+      transform-origin: center center;
+      transition: transform 0.3s ease;
+      width: 18px;
+      height: 18px;
+    }
 
-.collaborator-leitos {
-  padding-bottom: 5%;
-  display: block;
-}
+    &__trigger.is-open:after {
+      transform: rotateZ(90deg);
+    }
 
-.about-card-profile {
-  background-color: white;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-  border-radius: 20px;
-  width: 200px;
-  height: 300px;
-  flex-direction: column;
-  padding: 0;
-  margin:10px;
-}
-
-.about-card-profile .avatar {
-  border-radius: 100px;
-  margin-left: 20px;
-  width:80%;
-}
-
-.about-card-profile .git {
-  width:30px;
-  padding: 10px;
-}
-
-.inf-profile h4 {
-  text-align: center;
-}
-
-.inf {
-  display: flex;
+    &__contentInner {
+      padding: 0 1.5rem 1.25rem 1.5rem;
+      text-align: justify;
+    }
+  }
 }
