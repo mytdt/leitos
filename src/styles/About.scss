@@ -16,8 +16,8 @@
 
   .Collapsible {
     background-color: white;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
     border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
     margin: 10px;
     min-height: 22px;
     position: relative;
@@ -34,8 +34,9 @@
       background-color: #7b858e;
       content: '';
       display: block;
+      height: 18px;
       margin: 2px;
-      mask: url(../icons/left-arrow.svg);
+      mask: url('../icons/left-arrow.svg');
       position: absolute;
       right: 1.25rem;
       top: 1.25rem;
@@ -43,7 +44,6 @@
       transform-origin: center center;
       transition: transform 0.3s ease;
       width: 18px;
-      height: 18px;
     }
 
     &__trigger.is-open:after {
@@ -51,7 +51,7 @@
     }
 
     &__contentInner {
-      padding: 0 1.5rem 1.25rem 1.5rem;
+      padding: 0 1.5rem 1.25rem;
       text-align: justify;
     }
   }

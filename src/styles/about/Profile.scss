@@ -1,14 +1,14 @@
 .about-card-profile {
+  color: black;
   display: block;
   margin: 10px;
   text-decoration: none;
-  color: #000000;
   width: 200px;
 
   .avatar {
     background-color: white;
-    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.35);
     border-radius: 6px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.35);
     display: block;
     width: 100%;
   }
